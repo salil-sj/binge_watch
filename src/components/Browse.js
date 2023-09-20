@@ -1,19 +1,19 @@
-import React from 'react'
-import DropDownMenu from './DropDownMenu'
-import { useSelector } from 'react-redux'
+import React from "react";
+import DropDownMenu from "./DropDownMenu";
+import { useSelector } from "react-redux";
+import TrendingMovies from "./TrendingMovies";
 
 const Browse = () => {
+  const isSideBarEnabled = useSelector((store) => store.user.isSlideBarActive);
 
-    const isSideBarEnabled = useSelector((store)=>store.user.isSlideBarActive)
-  
-    
-    if(!isSideBarEnabled) return null
+  // if(!isSideBarEnabled) return null
 
   return (
-    <div>
-        <DropDownMenu/>
+    <div className="bg-black">
+      {isSideBarEnabled ? <DropDownMenu /> : null}
+      <TrendingMovies />
     </div>
-  )
-}
+  );
+};
 
-export default Browse
+export default Browse;

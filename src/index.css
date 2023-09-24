@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+    https://github.com/tailwindlabs/tailwindcss/discussions/2394
+    https://github.com/tailwindlabs/tailwindcss/pull/5732
+*/
+/* Chrome, Edge, and Safari */
+
+
+
+/* *::-webkit-scrollbar {
+    display: none;
+  } */

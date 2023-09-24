@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import useTrendingMovies from "../hooks/useTrendingMovies";
 import Poster from "./Poster";
+import TrendingMoviesCards from "./TrendingMoviesCards";
 
 const TrendingMovies = () => {
   const movieDetails = useSelector(
@@ -9,10 +10,8 @@ const TrendingMovies = () => {
 
   if (movieDetails == null) return null;
 
-  console.log(movieDetails);
-  const { original_title, backdrop_path , vote_average , overview } = movieDetails?.results[4];
-
-
+  const { original_title, backdrop_path, vote_average, overview, id } =
+    movieDetails?.results[3];
 
   return (
     <div>
@@ -20,7 +19,21 @@ const TrendingMovies = () => {
         {" "}
         Trending Movies{" "}
       </h1>
-      <Poster title ={original_title} poster={backdrop_path} average ={vote_average} details ={overview}/>
+      <Poster
+        title={original_title}
+        poster={backdrop_path}
+        average={vote_average}
+        details={overview}
+        id={id}
+      />
+
+      <div className="flex overflow-x-scroll px-8 " >
+        <div className="flex ">
+          {movieDetails.results.map((movie) => {
+            return <TrendingMoviesCards movieData={movie} />;
+          })}
+        </div>
+      </div>
     </div>
   );
 };

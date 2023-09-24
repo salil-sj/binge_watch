@@ -3,6 +3,7 @@ import DropDownMenu from "./DropDownMenu";
 import { useSelector } from "react-redux";
 import TrendingMovies from "./TrendingMovies";
 import useTrendingMovies from "../hooks/useTrendingMovies";
+import { Outlet } from "react-router-dom";
 
 
 const Browse = () => {
@@ -14,8 +15,7 @@ const Browse = () => {
   return (
     <div className="bg-gray-950 w-screen h-screen">
       {isSideBarEnabled ? <DropDownMenu /> : null}
-      
-      <TrendingMovies/>
+      <Outlet/>
     </div>
   );
 };

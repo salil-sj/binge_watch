@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
-import { OPTIONS, TRENDING_MOVIES_API_URL } from "../utils/TMDBConstants";
+import { useDispatch, useSelector } from "react-redux";
+import useTrendingMovies from "../hooks/useTrendingMovies";
+import Poster from "./Poster";
 
 const TrendingMovies = () => {
-  useEffect(() => {
-    getTrendingMovies();
-  }, []);
+  const movieDetails = useSelector(
+    (store) => store.movieData.trendingMovieDetails
+  );
 
-  const getTrendingMovies = async () => {
-    const result = await fetch(TRENDING_MOVIES_API_URL, OPTIONS);
-    const trendingmovies = await result.json();
-    console.log(trendingmovies);
-    console.log(trendingmovies?.results[0])
-  };
+  if (movieDetails == null) return null;
+
+  console.log(movieDetails);
+  const { original_title, backdrop_path , vote_average , overview } = movieDetails?.results[2];
+
+
 
   return (
-    <div className="h-screen">
-      <h1 className="text-xl  sm:text-3xl font-bold  p-2  sm:p-2 ml-2 sm:ml-8 text-white">
+    <div>
+      <h1 className="text-white font-bold text-xl ml-4 pt-4 px-1 pb-1 ">
         {" "}
-        Movies
+        Trending Movies{" "}
       </h1>
+      <Poster title ={original_title} poster={backdrop_path} average ={vote_average} details ={overview}/>
     </div>
   );
 };

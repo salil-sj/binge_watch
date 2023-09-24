@@ -14,18 +14,18 @@ const Header = () => {
   }
 
   return (
-    <div className="bg-black">
+    <div className="bg-black w-screen">
       {/* Desktop Header */}
 
       <ul className="text-white hidden lg:flex justify-center ">
-        <li className="m-3 p-2 text-xl">primeVideo</li>
-        <li className="m-3 p-2 text-xl">Home</li>
-        <li className="m-3 p-2 text-xl">Store</li>
-        <li className="m-3 p-2 text-xl">Live Tv</li>
-        <li className="m-3 p-2 text-xl">Categories</li>
-        <li className="m-3 p-2 text-xl">My Stuff</li>
+        <li className="m-1 mx-3 p-2 text-xl">primeVideo </li>
+        <li className="m-1 mx-3 p-2 text-xl">Home</li>
+        <li className="m-1 mx-3 p-2 text-xl">Store</li>
+        <li className="m-1 mx-3 p-2 text-xl">Live Tv</li>
+        <li className="m-1 mx-3 p-2 text-xl">Categories</li>
+        <li className="m-1 mx-3 p-2 text-xl">My Stuff</li>
         <li>
-          <LiaUser className="text-white text-4xl m-4" />
+          <LiaUser className="text-white text-3xl my-3 mx-5" />
         </li>
       </ul>
 

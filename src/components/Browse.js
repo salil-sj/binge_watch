@@ -2,16 +2,20 @@ import React from "react";
 import DropDownMenu from "./DropDownMenu";
 import { useSelector } from "react-redux";
 import TrendingMovies from "./TrendingMovies";
+import useTrendingMovies from "../hooks/useTrendingMovies";
+
 
 const Browse = () => {
+  
   const isSideBarEnabled = useSelector((store) => store.user.isSlideBarActive);
-
-  // if(!isSideBarEnabled) return null
+  
+  useTrendingMovies();
 
   return (
-    <div className="bg-black">
+    <div className="bg-black w-screen h-screen">
       {isSideBarEnabled ? <DropDownMenu /> : null}
-      <TrendingMovies />
+      
+      <TrendingMovies/>
     </div>
   );
 };

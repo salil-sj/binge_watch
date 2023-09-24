@@ -10,13 +10,13 @@ const TrendingMovies = () => {
   if (movieDetails == null) return null;
 
   console.log(movieDetails);
-  const { original_title, backdrop_path , vote_average , overview } = movieDetails?.results[2];
+  const { original_title, backdrop_path , vote_average , overview } = movieDetails?.results[4];
 
 
 
   return (
     <div>
-      <h1 className="text-white font-bold text-xl ml-4 pt-4 px-1 pb-1 ">
+      <h1 className="text-white font-bold  text-xl sm:text-3xl ml-4 sm:ml-14 pt-4 px-1  ">
         {" "}
         Trending Movies{" "}
       </h1>

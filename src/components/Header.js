@@ -14,7 +14,7 @@ const Header = () => {
   }
 
   return (
-    <div className="bg-black w-screen">
+    <div className="bg-gray-950 w-screen">
       {/* Desktop Header */}
 
       <ul className="text-white hidden lg:flex justify-center ">

@@ -14,35 +14,23 @@ import {
   AiOutlinePlus,
 } from "react-icons/ai";
 import { MdOutlineLocalMovies } from "react-icons/md";
+import useMoviesTrailer from "../hooks/useMoviesTrailer";
 
+/*This movie details will take two params from route
+1. Movie Id- using which it makes rest call to get trailer
+2. Store Name- using which it searches on basis of it like trending movie data , popular movie data etc
+*/
 const MovieDetails = () => {
-  const [trailerDetails, setTrailerDetails] = useState();
   const [searchParams] = useSearchParams();
   const movieId = searchParams.get("v");
-
+  const storeName = searchParams.get("store");
   const movieDetais = useSelector(
-    (store) => store.movieData.trendingMovieDetails
+    (store) => store.movieData[storeName]
   )?.results;
   const movieData = movieDetais?.filter((movie) => movie.id == movieId);
 
-  const getMovieTrailerDetails = async () => {
-    const data = await fetch(
-      TREDNING_MOVIES_TRAILER_START + movieId + TREDNING_MOVIES_TRAILER_END,
-      OPTIONS
-    );
-    const result = await data.json();
-    const filterData = result?.results?.filter(
-      (movie) => (movie.type = "Trailer")
-    )[0];
-    setTrailerDetails(filterData);
-  };
-
-  console.log("Movie data ");
-  console.log(movieData);
-
-  useEffect(() => {
-    getMovieTrailerDetails();
-  }, []);
+  //Custom Hook:
+  const trailerDetails = useMoviesTrailer(movieId);
 
   if (movieData == null) return;
 
@@ -107,15 +95,21 @@ const MovieDetails = () => {
             More Purchase Options
           </button>
         </div>
-        <h1 className="text-yellow-600 ml-4 text-sm mt-3">{movieData[0].vote_average + "/10"}</h1>
+        <h1 className="text-yellow-600 ml-4 text-sm mt-3">
+          {movieData[0].vote_average + "/10"}
+        </h1>
         <div className="flex">
-        <h1 className="text-white ml-4 text-sm font-bold">{"Released on:"}</h1>
-        <h1 className="text-white ml-4 text-sm">{movieData[0].release_date}</h1>
+          <h1 className="text-white ml-4 text-sm font-bold">
+            {"Released on:"}
+          </h1>
+          <h1 className="text-white ml-4 text-sm">
+            {movieData[0].release_date}
+          </h1>
         </div>
         <h1 className="text-white text-sm ml-1  p-3">
           {movieData[0].overview}
         </h1>
-       
+
         <div className="text-white flex text-3xl justify-center ">
           <div className="m-2 p-1 ">
             <MdOutlineLocalMovies className=" m-2" />

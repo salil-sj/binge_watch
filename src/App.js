@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div>
+      <div className="bg-gray-950">
         <Header />
         <RouterProvider router={appRouter} />
       </div>

@@ -13,7 +13,7 @@ const Browse = () => {
   useTrendingMovies();
 
   return (
-    <div className="bg-gray-950 w-screen ">
+    <div className=" w-screen ">
       {isSideBarEnabled ? <DropDownMenu /> : null}
       <Outlet/>
     </div>

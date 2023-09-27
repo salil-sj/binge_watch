@@ -19,7 +19,7 @@ const Poster = ({ title, poster, average, details, id }) => {
             <h1 className="text-yellow-600 font-bold ml-1 mt-1 text-xs sm:text-lg">
               {average}/10
             </h1>
-            <Link to={"/moreDetails?v=" +id}>
+            <Link to={"/moreDetails?v=" + id+"&store=trendingMovieDetails"}>
               <button className="bg-white p-1 sm:p-4 mt-4 sm:mt-10 rounded-md font-bold hover:opacity-20 ">
                 More Details
               </button>

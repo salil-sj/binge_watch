@@ -8,7 +8,7 @@ const Poster = ({ title, poster, average, details, id }) => {
       <div className="ml-2 relative ">
         <div>
           <img
-            className="w-screen h-52  sm:h-[550px] object-cover "
+            className="w-screen h-52  sm:h-[420px] 2xl:h-[550px] object-cover "
             src={POSTER_URL + poster}
           />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent  to-black "></div>

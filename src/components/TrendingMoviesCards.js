@@ -7,7 +7,7 @@ const TrendingMoviesCards = ({movieData}) => {
     const {id , overview , backdrop_path , original_title , vote_average } = movieData
     console.log(movieData)
     return (
-    <div className='w-[350px] m-3 '>
+    <div className='w-[350px] m-3 transition-transform transform hover:scale-110 '>
      <img
             className="rounded-lg"
             src={POSTER_URL + backdrop_path}

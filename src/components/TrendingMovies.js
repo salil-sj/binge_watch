@@ -11,7 +11,7 @@ const TrendingMovies = () => {
   if (movieDetails == null) return null;
 
   const { original_title, backdrop_path, vote_average, overview, id } =
-    movieDetails?.results[3];
+    movieDetails?.results[2];
 
   return (
     <div>

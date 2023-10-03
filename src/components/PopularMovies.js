@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux'
 
 const PopularMovies = () => {
 
-  //Custom hook:
-  usePopularMovie();
+ 
 
   const data = useSelector((store)=>store.movieData.popularMovieDetails)
 

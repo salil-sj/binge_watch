@@ -32,6 +32,9 @@ const MovieDetails = () => {
   //Custom Hook:
   const trailerDetails = useMoviesTrailer(movieId);
 
+  {console.log("*******************")}
+  {console.log(trailerDetails)}
+
   if (movieData == null) return;
 
   return (
@@ -53,6 +56,9 @@ const MovieDetails = () => {
         <div className="absolute top-10 sm:top-[300px]  left-3 sm:left-24">
           <h1 className="text-2xl sm:text-8xl font-bold text-white">
             {movieData[0].original_title}
+          </h1>
+          <h1 className="text-2xl sm:text-8xl font-bold text-white">
+            {movieData[0].original_name}
           </h1>
           <h1 className="text-2xl sm:text-lg mt-6 w-[70%] text-white">
             {movieData[0].overview}

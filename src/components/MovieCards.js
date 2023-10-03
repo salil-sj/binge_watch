@@ -10,9 +10,6 @@ const MovieCards = ({ movieData , store }) => {
   const { id, overview, backdrop_path, original_title, vote_average } =
     movieData;
 
-   console.log("Movie data............")
-   console.log(store)
-
  
   return (
     <div className="w-[350px] m-3 transition-transform transform hover:scale-110 h-full">

@@ -14,6 +14,7 @@ const useMoviesTrailer = (movieId) => {
       OPTIONS
     );
     const result = await data.json();
+
     const filterData = result?.results?.filter(
       (movie) => (movie.type = "Trailer")
     )[0];

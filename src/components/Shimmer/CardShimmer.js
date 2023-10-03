@@ -1,21 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import useTrendingMovies from "../hooks/useTrendingMovies";
-import Poster from "./Poster";
-import TrendingMoviesCards from "./MovieCards";
-import MovieCards from "./MovieCards";
+import React from 'react'
 
-const TrendingMovies = () => {
-  const movieDetails = useSelector(
-    (store) => store.movieData.trendingMovieDetails
-  );
-
-  if (movieDetails == null) return null;
-
-  const { original_title, backdrop_path, vote_average, overview, id } =
-    movieDetails?.results[2];
-
+const CardShimmer = () => {
   return (
     <div>
+        <div>
       <h1 className="text-white font-bold  text-xl sm:text-3xl ml-4 sm:ml-14 pt-4 px-1  ">
         {" "}
         Movies{" "}
@@ -44,7 +32,8 @@ const TrendingMovies = () => {
         </div>
       </div>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default TrendingMovies;
+export default CardShimmer

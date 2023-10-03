@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import useTrendingMovies from "../hooks/useTrendingMovies";
 import Poster from "./Poster";
-import TrendingMoviesCards from "./TrendingMoviesCards";
+import TrendingMoviesCards from "./MovieCards";
+import MovieCards from "./MovieCards";
 
 const TrendingMovies = () => {
   const movieDetails = useSelector(
@@ -17,7 +18,7 @@ const TrendingMovies = () => {
     <div>
       <h1 className="text-white font-bold  text-xl sm:text-3xl ml-4 sm:ml-14 pt-4 px-1  ">
         {" "}
-      Movies{" "}
+        Movies{" "}
       </h1>
       <Poster
         title={original_title}
@@ -27,16 +28,16 @@ const TrendingMovies = () => {
         id={id}
       />
 
-    <h1 className="text-white ml-11 text-2xl font-bold mb-1">Trending Movies</h1>
+      <h1 className="text-white ml-11 text-2xl font-bold mb-1">
+        Trending Movies
+      </h1>
       <div className="flex overflow-x-scroll px-8 ">
         <div className="flex ">
           {movieDetails.results.map((movie) => {
-            return <TrendingMoviesCards movieData={movie} />;
+            return <MovieCards movieData={movie} store="trendingMovieDetails" />;
           })}
         </div>
       </div>
-      <h1>.</h1>
-      <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1> <h1>.</h1>s
     </div>
   );
 };

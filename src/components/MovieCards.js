@@ -2,10 +2,18 @@ import React from "react";
 import { POSTER_URL } from "../utils/TMDBConstants";
 import { Link } from "react-router-dom";
 
-const TrendingMoviesCards = ({ movieData }) => {
+
+/*
+This is a generic component Which takes movie daata and store name and display movie cards
+*/
+const MovieCards = ({ movieData , store }) => {
   const { id, overview, backdrop_path, original_title, vote_average } =
     movieData;
-  console.log(movieData);
+
+   console.log("Movie data............")
+   console.log(store)
+
+ 
   return (
     <div className="w-[350px] m-3 transition-transform transform hover:scale-110 h-full">
       <img className="rounded-lg" src={POSTER_URL + backdrop_path} />
@@ -27,7 +35,7 @@ const TrendingMoviesCards = ({ movieData }) => {
                 More Details
               </button>
             </Link> */}
-          <Link to={"/moreDetails?v=" + id + "&store=trendingMovieDetails"}>
+          <Link to={"/moreDetails?v=" + id + "&store="+store}>
             <button className="bg-white p-2 my-2 font-bold rounded-lg text-sm">
               More Info
             </button>
@@ -38,4 +46,4 @@ const TrendingMoviesCards = ({ movieData }) => {
   );
 };
 
-export default TrendingMoviesCards;
+export default MovieCards;

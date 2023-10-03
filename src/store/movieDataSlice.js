@@ -4,15 +4,19 @@ const movieDataSlice = createSlice(
     {
         name:"movieData",
         initialState:{
-            trendingMovieDetails: null
+            trendingMovieDetails: null,
+            popularMovieDetails: null
         },
         reducers:{
             enrichTrendingMovieDetails:(state,action)=>{
                 state.trendingMovieDetails = action.payload
+            },
+            enrichPopularMovieDetails:(state,action)=>{
+                state.popularMovieDetails=action.payload
             }
         }
     }
 )
 
-export const {enrichTrendingMovieDetails} = movieDataSlice.actions;
+export const {enrichTrendingMovieDetails,enrichPopularMovieDetails} = movieDataSlice.actions;
 export default movieDataSlice.reducer

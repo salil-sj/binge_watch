@@ -57,7 +57,7 @@ const MovieDetails = () => {
           <h1 className="text-2xl sm:text-lg mt-6 w-[70%] text-white">
             {movieData[0].overview}
           </h1>
-          <div className="mt-2">
+          <div className="mt-6">
             <button className="opacity-70 hover:opacity-50 hover:bg-slate-400 hover:font-bold bg-gray-600 p-3 rounded-lg mr-3 text-white">
               Rent HD ₹500{" "}
             </button>

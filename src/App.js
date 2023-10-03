@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { MdWatch } from "react-icons/md";
 import MovieDetails from "./components/MovieDetails";
 import TrendingMovies from "./components/TrendingMovies";
+import HomePage from "./components/HomePage";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -17,7 +18,7 @@ function App() {
       children:[
         {
           path:"/",
-          element:<TrendingMovies/>
+          element:<HomePage/>
         },
         {
           path:'moreDetails',

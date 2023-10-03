@@ -13,3 +13,5 @@ export const TRENDING_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/now_p
 export const TREDNING_MOVIES_TRAILER_START ="https://api.themoviedb.org/3/movie/";
 export const TREDNING_MOVIES_TRAILER_END = "/videos?language=en-US";
 export const POSTER_URL = "https://image.tmdb.org/t/p/original"
+
+export const POPULAR_MOVIES = "https://api.themoviedb.org/3/movie/top_rated?original_language=hi&page=1"

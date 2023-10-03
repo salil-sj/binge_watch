@@ -9,6 +9,7 @@ import useAiringToday from '../hooks/useAiringToday';
 import AiringTodayTvShow from './AiringTodayTvShow';
 import usePopularTvShow from '../hooks/usePopularTvShow';
 import PopularTvShow from './PopularTvShow';
+import CardShimmer from './Shimmer/CardShimmer';
 
 const HomePage = () => {
 
@@ -22,7 +23,7 @@ const HomePage = () => {
   return (
     <div>
       
-      
+       
         <TrendingMovies/>
         <PopularMovies/>
         <UpCommingMovies/>

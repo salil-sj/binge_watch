@@ -2,12 +2,29 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import MovieCards from './MovieCards';
 import Poster from './Poster';
+import CardShimmer from './Shimmer/CardShimmer';
 
 const UpCommingMovies = () => {
     
     const movieDetails = useSelector((store)=>store.movieData.upCommingMovies)
     
-      if (movieDetails == null) return null;
+      if (movieDetails == null) return (
+        <div>
+        <h1 className="text-white ml-11 text-2xl font-bold mb-1">
+            Up-comming Movies
+          </h1>
+        <div className='flex p-2 mx-5 '>
+        <CardShimmer/>
+        <CardShimmer/>
+        <CardShimmer/>
+        <CardShimmer/>
+        <CardShimmer/>
+        <CardShimmer/>
+        
+        
+      </div>
+      </div>
+      )
 
       {console.log("Up comming")}
       {console.log(movieDetails)}

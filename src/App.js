@@ -9,6 +9,7 @@ import { MdWatch } from "react-icons/md";
 import MovieDetails from "./components/MovieDetails";
 import TrendingMovies from "./components/TrendingMovies";
 import HomePage from "./components/HomePage";
+import Login from "./components/Login";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -23,15 +24,20 @@ function App() {
         {
           path:'moreDetails',
           element:<MovieDetails/>
+        },
+        {
+          path:'login',
+          element:<Login/>
         }
+        
       ]
-    },
+    }
   ]);
 
   return (
     <Provider store={store}>
-      <div className="bg-gray-950">
-        <Header />
+      <div className="">
+        <Header/>
         <RouterProvider router={appRouter} />
       </div>
     </Provider>

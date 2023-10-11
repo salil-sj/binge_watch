@@ -35,7 +35,7 @@ const MovieDetails = () => {
   {console.log("*******************")}
   {console.log(trailerDetails)}
 
-  if (movieData == null) return;
+  if (movieData == null) return
 
   return (
     <div className="relative">

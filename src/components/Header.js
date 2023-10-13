@@ -3,11 +3,14 @@ import { LiaUser } from "react-icons/lia";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { toggleSideBar } from "../store/userSlice";
+import { removeUserDetails, toggleSideBar } from "../store/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
 
+  const handleLogout =()=>{
+    dispatch(removeUserDetails())
+  }
 
   const toggleSideBarFun  = ()=>{
     dispatch(toggleSideBar())
@@ -17,7 +20,7 @@ const Header = () => {
     <div className="w-screen p-2 bg-gray-950">
       {/* Desktop Header */}
 
-      <ul className="text-white hidden lg:flex justify-center  ">
+      <ul className="text-white hidden lg:flex justify-center">
         <li className="m-1 mx-3 p-2 text-2xl">primeVideo </li>
         <li className="m-1 mx-3 p-2 text-2xl">Home</li>
         <li className="m-1 mx-3 p-2 text-2xl">Store</li>
@@ -27,6 +30,10 @@ const Header = () => {
         <li>
           <LiaUser className="text-white text-3xl my-3 mx-5" />
         </li>
+        <button className="m-1 mx-3 p-2 text-2xl"
+        onClick={handleLogout}
+        >Logout</button>
+
       </ul>
 
       {/* Mobile Header */}

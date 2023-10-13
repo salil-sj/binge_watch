@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Browse from "./components/Browse";
 import store from "./store/store";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { MdWatch } from "react-icons/md";
 import MovieDetails from "./components/MovieDetails";
 import TrendingMovies from "./components/TrendingMovies";
@@ -12,6 +12,8 @@ import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 
 function App() {
+
+
   const appRouter = createBrowserRouter([
     {
       path:'/',

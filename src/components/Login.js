@@ -1,10 +1,24 @@
 import React, { useRef, useState } from "react";
 import { emailValidation, passwordValidation } from "../utils/validator";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isSignin, setIsSignIn] = useState(true);
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const email = useRef(null);
   const password = useRef(null);
@@ -18,6 +32,66 @@ const Login = () => {
   const handleButtonLoginOrSignupButton = () => {
     setIsEmailError(!emailValidation(email.current.value));
     setIsPasswordError(!passwordValidation(password.current.value));
+    console.log("Is pwd error is " + isPasswordError)
+    console.log("Is email error is " + isEmailError)
+    if(!isEmailError && !isPasswordError) {
+
+      //TO DO:
+     /*
+--------------------------------------------------------------------------------------------------------
+|                                                
+|              CHECK LOGIC FOR why IT IS GOING TO FIREBASE CALL EVEN IF PWD AND EMAIL ARE INVALID                                  |
+|                                                
+----------------------------------------------------------------------------------------------------------
+     */
+
+      console.log("Is pwd error is " + isPasswordError)
+      // No validation failure, continue to login/signup
+      if (isSignin) {
+        //Sign in:
+        signInWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            dispatch(setUserDetails(user));
+            navigate("/browse");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setAuthError(errorCode + " " + errorMessage);
+          });
+      } else {
+        //Sign up
+        createUserWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
+          .then((userCredential) => {
+            // Signed up
+            const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+              displayName:
+                firstName.current.value + " " + lastName.current.value,
+            })
+              .then(() => {})
+              .catch((error) => {});
+
+            dispatch(setUserDetails(user));
+            navigate("/browse");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setAuthError(errorCode + " " + errorMessage);
+          });
+      }
+    }
   };
 
   return (
@@ -38,6 +112,7 @@ const Login = () => {
                 First Name
               </label>
               <input
+                ref={firstName}
                 type="text"
                 placeholder="First Name"
                 className="w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg"
@@ -49,6 +124,7 @@ const Login = () => {
                 Last Name
               </label>
               <input
+                ref={lastName}
                 type="text"
                 placeholder="Last Name"
                 className="w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg"
@@ -94,6 +170,7 @@ const Login = () => {
           ) : null}
         </div>
         <div className=" mt-8 mx-4 mb-10">
+          <h1 className="text-red-500 p-1 font-bold text-sm"> {authError}</h1>
           <button
             className=" bg-yellow-400  p-2 rounded-lg w-full font-bold hover:bg-yellow-500"
             onClick={handleButtonLoginOrSignupButton}

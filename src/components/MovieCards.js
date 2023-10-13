@@ -32,7 +32,7 @@ const MovieCards = ({ movieData , store }) => {
                 More Details
               </button>
             </Link> */}
-          <Link to={"/moreDetails?v=" + id + "&store="+store}>
+          <Link to={"/browse/moreDetails?v=" + id + "&store="+store}>
             <button className="bg-white p-2 my-2 font-bold rounded-lg text-sm">
               More Info
             </button>

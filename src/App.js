@@ -14,21 +14,22 @@ import Login from "./components/Login";
 function App() {
   const appRouter = createBrowserRouter([
     {
-      path: "/",
+      path:'/',
+          element:<Login/>
+    },
+    {
+      path: "/browse",
       element: <Browse/>,
       children:[
         {
-          path:"/",
+          path:"/browse",
           element:<HomePage/>
         },
         {
           path:'moreDetails',
           element:<MovieDetails/>
         },
-        {
-          path:'login',
-          element:<Login/>
-        }
+        
         
       ]
     }

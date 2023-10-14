@@ -1,9 +1,8 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { AiFillAppstore } from "react-icons/ai";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { MdOutlineCategory } from "react-icons/md";
-import { MdOutlineFeaturedPlayList } from "react-icons/md";
+
 
 const DropDownMenu = () => {
   return (

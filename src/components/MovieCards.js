@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { POSTER_URL } from "../utils/TMDBConstants";
 import { Link } from "react-router-dom";
+import CardShimmer from "./Shimmer/CardShimmer";
 
 
 /*
@@ -10,10 +11,18 @@ const MovieCards = ({ movieData , store }) => {
   const { id, overview, backdrop_path, original_title, vote_average } =
     movieData;
 
+  const [isLoading , setIsImageLoading] = useState(true)
+
+    const handleImageLoad = ()=>{
+      setIsImageLoading(false)
+    }
  
   return (
     <div className="w-[350px] m-3 transition-transform transform hover:scale-110 h-full">
-      <img className="rounded-lg" src={POSTER_URL + backdrop_path} />
+      {isLoading && <CardShimmer/>}
+      <img className={`rounded-lg ${isLoading ? 'hidden' : ''}`} src={POSTER_URL + backdrop_path}
+      onLoad={handleImageLoad}
+      />
 
       <div className="opacity-0 group hover:opacity-100">
         <div className="absolute inset-0 bg-gradient-to-l from-transparent  to-black "></div>

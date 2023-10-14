@@ -23,7 +23,7 @@ const Header = () => {
       <ul className="text-white hidden lg:flex justify-center">
         <li className="m-1 mx-3 p-2 text-2xl">primeVideo </li>
         <li className="m-1 mx-3 p-2 text-2xl">Home</li>
-        <li className="m-1 mx-3 p-2 text-2xl">Store</li>
+        <Link to={"/browse/development"}><li className="m-1 mx-3 p-2 text-2xl">Store</li></Link>
         <li className="m-1 mx-3 p-2 text-2xl">Live Tv</li>
         <li className="m-1 mx-3 p-2 text-2xl">Categories</li>
         <li className="m-1 mx-3 p-2 text-2xl">My Stuff</li>

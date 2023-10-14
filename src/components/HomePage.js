@@ -10,6 +10,7 @@ import AiringTodayTvShow from './AiringTodayTvShow';
 import usePopularTvShow from '../hooks/usePopularTvShow';
 import PopularTvShow from './PopularTvShow';
 import CardShimmer from './Shimmer/CardShimmer';
+import Header from './Header';
 
 const HomePage = () => {
 
@@ -23,7 +24,7 @@ const HomePage = () => {
   return (
     <div className='bg-gray-950'>
       
-       
+        
         <TrendingMovies/>
         <PopularMovies/>
         <UpCommingMovies/>

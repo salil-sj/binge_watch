@@ -10,37 +10,43 @@ import MovieDetails from "./components/MovieDetails";
 import TrendingMovies from "./components/TrendingMovies";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
+import InDevelopment from "./components/InDevelopment";
 
 function App() {
-
-
   const appRouter = createBrowserRouter([
     {
-      path:'/',
-          element:<Login/>
+      path: "/",
+      element: (
+        <div>
+          <Header />
+          <Login />
+        </div>
+      ),
     },
     {
       path: "/browse",
-      element: <Browse/>,
-      children:[
+      element: <Browse />,
+      children: [
         {
-          path:"/browse",
-          element:<HomePage/>
+          path: "/browse",
+          element: <HomePage />,
         },
         {
-          path:'moreDetails',
-          element:<MovieDetails/>
+          path: "moreDetails",
+          element: <MovieDetails />,
         },
-        
-        
-      ]
-    }
+        {
+          path: "development",
+          element: <InDevelopment />,
+        },
+      ],
+    },
+   
   ]);
 
   return (
     <Provider store={store}>
       <div className="">
-        <Header/>
         <RouterProvider router={appRouter} />
       </div>
     </Provider>

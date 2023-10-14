@@ -92,6 +92,7 @@ const Login = () => {
         navigate("/browse");
       })
       .catch((error) => {
+        setLoadingState(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         setAuthError(errorCode + " " + errorMessage);

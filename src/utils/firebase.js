@@ -24,3 +24,14 @@ const analytics = getAnalytics(app);
 
 // Firebase Constants:
 export const auth = getAuth();
+
+
+export const getLoginError = (err)=>{
+  if(err === "auth/invalid-login-credentials Firebase: Error (auth/invalid-login-credentials).")
+  {
+    return "Invalid Credentials"
+  }
+  else{
+    return "Unexpected error occured. Please try again or contact the administrator"
+  }
+}

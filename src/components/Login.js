@@ -6,10 +6,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import { auth } from "../utils/firebase";
+import { auth, getLoginError } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Login = () => {
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [loadingState, setLoadingState] = useState(false);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -30,68 +32,70 @@ const Login = () => {
   };
 
   const handleButtonLoginOrSignupButton = () => {
-    setIsEmailError(!emailValidation(email.current.value));
-    setIsPasswordError(!passwordValidation(password.current.value));
-    console.log("Is pwd error is " + isPasswordError)
-    console.log("Is email error is " + isEmailError)
-    if(!isEmailError && !isPasswordError) {
+    setLoadingState(true);
+    const isPwdValid = passwordValidation(password.current.value);
+    const isEmailValid = emailValidation(email.current.value); // returns true if email is valid
 
-      //TO DO:
-     /*
---------------------------------------------------------------------------------------------------------
-|                                                
-|              CHECK LOGIC FOR why IT IS GOING TO FIREBASE CALL EVEN IF PWD AND EMAIL ARE INVALID                                  |
-|                                                
-----------------------------------------------------------------------------------------------------------
-     */
+    setIsEmailError(!isEmailValid);
+    setIsPasswordError(!isPwdValid);
 
-      console.log("Is pwd error is " + isPasswordError)
-      // No validation failure, continue to login/signup
-      if (isSignin) {
-        //Sign in:
-        signInWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        )
-          .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            dispatch(setUserDetails(user));
-            navigate("/browse");
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setAuthError(errorCode + " " + errorMessage);
-          });
-      } else {
-        //Sign up
-        createUserWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        )
-          .then((userCredential) => {
-            // Signed up
-            const user = userCredential.user;
-            updateProfile(auth.currentUser, {
-              displayName:
-                firstName.current.value + " " + lastName.current.value,
-            })
-              .then(() => {})
-              .catch((error) => {});
-
-            dispatch(setUserDetails(user));
-            navigate("/browse");
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setAuthError(errorCode + " " + errorMessage);
-          });
-      }
+    if (!isPwdValid || !isEmailValid) {
+      setLoadingState(false);
+      return;
     }
+
+    if (isSignin) {
+      //Sign in:
+      signIn();
+    } else {
+      signUp();
+    }
+  };
+
+  const signIn = () => {
+    signInWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(setUserDetails(user));
+        navigate("/browse");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setLoadingState(false);
+        setAuthError(getLoginError(errorCode + " " + errorMessage));
+      });
+  };
+
+  const signUp = () => {
+    //Sign up
+    createUserWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        updateProfile(auth.currentUser, {
+          displayName: firstName.current.value + " " + lastName.current.value,
+        })
+          .then(() => {})
+          .catch((error) => {});
+
+        dispatch(setUserDetails(user));
+        navigate("/browse");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setAuthError(errorCode + " " + errorMessage);
+      });
   };
 
   return (
@@ -169,13 +173,16 @@ const Login = () => {
             </h1>
           ) : null}
         </div>
-        <div className=" mt-8 mx-4 mb-10">
+        <div className=" mt-4 mx-4 mb-10">
           <h1 className="text-red-500 p-1 font-bold text-sm"> {authError}</h1>
           <button
             className=" bg-yellow-400  p-2 rounded-lg w-full font-bold hover:bg-yellow-500"
             onClick={handleButtonLoginOrSignupButton}
           >
-            {isSignin ? "SignIn" : "SignUp"}
+            <div className="flex justify-center">
+              {isSignin ? "SignIn" : "SignUp"}
+              {loadingState ? <Spinner /> : null}
+            </div>
           </button>
 
           <div className="mt-3">

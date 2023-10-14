@@ -29,6 +29,10 @@ const Login = () => {
 
   const toggleIsSignIn = () => {
     setIsSignIn(!isSignin);
+    setIsEmailError(false);
+    setIsPasswordError(false);
+    setAuthError(false)
+    
   };
 
   const handleButtonLoginOrSignupButton = () => {
@@ -168,10 +172,21 @@ const Login = () => {
             }`}
           />
           {isPasswordError ? (
-            <h1 className="text-red-500 text-sm font-bold p-1">
-              {" "}
-              Please enter a valid Password{" "}
+            <div className="break-words">
+            <h1 className="text-red-500 text-sm font-bold p-1 ">
+              Password should contain at least - 
             </h1>
+            <ol className="text-red-500 text-[13px] font-bold ml-8 list-disc">
+              <li>8 characters</li>
+              <li>1 uppercase</li>
+              <li>1 lowercase letter</li>
+              <li> 1 digit</li>
+              <li> 1 special character(e.g., !@#$%^&*)</li>
+
+            </ol>
+            
+            </div>
+
           ) : null}
         </div>
         <div className=" mt-4 mx-4 mb-10">

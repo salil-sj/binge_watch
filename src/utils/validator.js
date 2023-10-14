@@ -14,4 +14,6 @@ Contains at least one uppercase letter
 Contains at least one lowercase letter
 Contains at least one digit
 Contains at least one special character (e.g., !@#$%^&*)
+
+Password should contain at least - 8 characters, 1 uppercase , 1 lowercase letter , 1 digit , 1 special character(e.g., !@#$%^&*)
 */

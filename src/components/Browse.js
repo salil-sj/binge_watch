@@ -20,9 +20,16 @@ const Browse = () => {
     }
   },[userDetails])
 
+
+  /*
+    TO DO://
+    Header position has to be decided
+    Slidebar is not sliding upon components, its position has to be decided
+  */
+
   return (
     <div className=" w-screen ">
-      <Header/>
+      <Header/>    
       {isSideBarEnabled ? <DropDownMenu /> : null}
       <Outlet/>
     </div>

@@ -18,16 +18,16 @@ const MovieCards = ({ movieData , store }) => {
     }
  
   return (
-    <div className="w-[350px] m-3 transition-transform transform hover:scale-110 h-full">
+    <div className="w-[350px] m-3 transition-transform transform  hover:scale-[125%]  h-full relative hover:z-50 max-w-350 max-h-30 ">
       {isLoading && <CardShimmer/>}
-      <img className={`rounded-lg ${isLoading ? 'hidden' : ''}`} src={POSTER_URL + backdrop_path}
+      <img className={`rounded-lg    ${isLoading ? 'hidden' : ''}`} src={POSTER_URL + backdrop_path}
       onLoad={handleImageLoad}
       />
 
-      <div className="opacity-0 group hover:opacity-100">
+      <div className="opacity-0 group hover:opacity-100 ">
         <div className="absolute inset-0 bg-gradient-to-l from-transparent  to-black "></div>
-        <div className="absolute top-10 sm:top-6 left-2 sm:left-5">
-          <h1 className="text-3xl sm:text-2xl font-bold text-white">
+        <div className="absolute top-10 sm:top-6 left-2 sm:left-5 p-1">
+          <h1 className="text-2xl sm:text-xl  font-bold text-white mt-2 ">
             {original_title}
           </h1>
           <h1 className="text-yellow-600 font-bold p-1 text-xs ">
@@ -42,7 +42,7 @@ const MovieCards = ({ movieData , store }) => {
               </button>
             </Link> */}
           <Link to={"/browse/moreDetails?v=" + id + "&store="+store}>
-            <button className="bg-white p-2 my-2 font-bold rounded-lg text-sm">
+            <button className="bg-white p-1 my-2 font-bold rounded-lg text-sm">
               More Info
             </button>
           </Link>

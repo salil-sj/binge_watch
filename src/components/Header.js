@@ -66,8 +66,8 @@ const Header = () => {
             <Link to={"/browse/development"}>
               <li className="m-1 mx-3 p-2 text-2xl">Categories</li>
             </Link>
-            <Link to={"/browse/development"}>
-              <li className="m-1 mx-3 p-2 text-2xl">My Stuff</li>
+            <Link to={"/browse/recommendation"}>
+              <li className="m-1 mx-3 p-2 text-2xl">Movies Recommendation</li>
             </Link>
             <li></li>
           </ul>

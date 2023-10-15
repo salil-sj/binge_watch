@@ -11,6 +11,7 @@ import TrendingMovies from "./components/TrendingMovies";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import InDevelopment from "./components/InDevelopment";
+import MovieRecommendation from "./components/MovieRecommendation";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -38,6 +39,10 @@ function App() {
         {
           path: "development",
           element: <InDevelopment />,
+        },
+        {
+          path: "recommendation",
+          element:<MovieRecommendation/>,
         },
       ],
     },

@@ -24,11 +24,7 @@ const Browse = () => {
   // Added because without this if you click on home, it shows a transparent view of home page
   if(userDetails ==null) return null
 
-  /*
-    TO DO://
-    Header position has to be decided
-    Slidebar is not sliding upon components, its position has to be decided
-  */
+
 
   return (
     <div className=" w-screen relative">

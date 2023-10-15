@@ -89,11 +89,14 @@ const Login = () => {
         updateProfile(auth.currentUser, {
           displayName: firstName.current.value + " " + lastName.current.value,
         })
-          .then(() => {})
+          .then(() => {
+            dispatch(setUserDetails(user));
+        navigate("/browse");
+
+          })
           .catch((error) => {});
 
-        dispatch(setUserDetails(user));
-        navigate("/browse");
+        
       })
       .catch((error) => {
         setLoadingState(false);

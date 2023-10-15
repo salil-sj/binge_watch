@@ -22,7 +22,7 @@ const HomePage = () => {
    usePopularTvShow();
 
   return (
-    <div className='bg-gray-950'>
+    <div className='bg-gray-950 '>
       
         
         <TrendingMovies/>

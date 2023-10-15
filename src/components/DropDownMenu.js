@@ -7,7 +7,7 @@ import { MdOutlineFeaturedPlayList } from "react-icons/md";
 
 const DropDownMenu = () => {
   return (
-    <div className="bg-black text-white w-1/2 h-screen ">
+    <div className="bg-gray-950 text-white w-1/2 h-screen absolute z-50">
       <div className="flex">
         <AiOutlineHome className="ml-3 mt-3" />
         <div className=" ml-1 p-2 text-md">Home </div>

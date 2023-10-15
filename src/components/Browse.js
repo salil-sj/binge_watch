@@ -28,9 +28,9 @@ const Browse = () => {
   */
 
   return (
-    <div className=" w-screen ">
+    <div className=" w-screen relative">
       <Header/>    
-      {isSideBarEnabled ? <DropDownMenu /> : null}
+      {isSideBarEnabled ? <DropDownMenu/> : null}
       <Outlet/>
     </div>
   );

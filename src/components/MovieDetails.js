@@ -73,7 +73,7 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className="sm:hidden">
+      <div className="sm:hidden bg-gray-950">
         <iframe
           className="h-1/2 w-screen p-2 rounded-sm  "
           src={

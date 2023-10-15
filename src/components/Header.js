@@ -1,40 +1,103 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LiaUser } from "react-icons/lia";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeUserDetails, toggleSideBar } from "../store/userSlice";
 
+import { IoMdArrowDropdown } from "react-icons/io";
+import ProfileDropdown from "./ProfileDropdown";
+
 const Header = () => {
   const dispatch = useDispatch();
+  const profileDropdownRef = useRef(null);
 
-  const handleLogout =()=>{
-    dispatch(removeUserDetails())
-  }
+  const userDetails = useSelector((store) => store.user.userDetails);
+  const firstName = userDetails?.displayName.split(" ")[0];
 
-  const toggleSideBarFun  = ()=>{
-    dispatch(toggleSideBar())
-  }
+  const [showProfileDropDown, setShowProfileDropDown] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target)
+      ) {
+        closeProfileDropDown();
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleSideBarFun = () => {
+    dispatch(toggleSideBar());
+  };
+
+  const closeProfileDropDown = () => {
+    setShowProfileDropDown(false);
+  };
+
+  const toggleProfileDropDown = () => {
+    setShowProfileDropDown(!showProfileDropDown);
+  };
 
   return (
     <div className="w-screen p-2 bg-gray-950">
       {/* Desktop Header */}
+      <div className="grid grid-cols-5 gap-4">
+        <div className="col-span-1 "></div>
+        <div className="col-span-3 ">
+          <ul className="text-white hidden lg:flex justify-center">
+            <li className="m-1 mx-3 p-2 text-2xl">primeVideo </li>
+            <Link to={"/browse"}>
+              <li className="m-1 mx-3 p-2 text-2xl">Home</li>
+            </Link>
+            <Link to={"/browse/development"}>
+              <li className="m-1 mx-3 p-2 text-2xl">Store</li>
+            </Link>
+            <Link to={"/browse/development"}>
+              <li className="m-1 mx-3 p-2 text-2xl">Live Tv</li>
+            </Link>
+            <Link to={"/browse/development"}>
+              <li className="m-1 mx-3 p-2 text-2xl">Categories</li>
+            </Link>
+            <Link to={"/browse/development"}>
+              <li className="m-1 mx-3 p-2 text-2xl">My Stuff</li>
+            </Link>
+            <li></li>
+          </ul>
+        </div>
 
-      <ul className="text-white hidden lg:flex justify-center">
-        <li className="m-1 mx-3 p-2 text-2xl">primeVideo </li>
-        <li className="m-1 mx-3 p-2 text-2xl">Home</li>
-        <Link to={"/browse/development"}><li className="m-1 mx-3 p-2 text-2xl">Store</li></Link>
-        <li className="m-1 mx-3 p-2 text-2xl">Live Tv</li>
-        <li className="m-1 mx-3 p-2 text-2xl">Categories</li>
-        <li className="m-1 mx-3 p-2 text-2xl">My Stuff</li>
-        <li>
-          <LiaUser className="text-white text-3xl my-3 mx-5" />
-        </li>
-        <button className="m-1 mx-3 p-2 text-2xl"
-        onClick={handleLogout}
-        >Logout</button>
-
-      </ul>
+        {userDetails && (
+          <div className="flex-row">
+            <div className="col-span-1 flex p-1 hover:cursor-pointer relative">
+              <h1 className="text-white ml-auto mr-4 text-3xl font-light mt-auto">
+                Hi, {firstName}
+              </h1>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Qou3wNk2Qfs7AN49-mULhwGRomERYXuu_fO3qYsTVkrON8-S67AMUwOTlccNYZhYyvU&usqp=CAU"
+                className="h-12 w-12  mt-1"
+                onClick={toggleProfileDropDown}
+              />
+              <IoMdArrowDropdown
+                className="text-white text-4xl"
+                onClick={toggleProfileDropDown}
+              />
+            </div>
+            {/* {showProfileDropDown ? <ProfileDropdown /> : null } */}
+            {showProfileDropDown && (
+              <div ref={profileDropdownRef}>
+                <ProfileDropdown />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Mobile Header */}
 

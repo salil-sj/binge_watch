@@ -18,8 +18,11 @@ const Browse = () => {
     {
       navigate("/")
     }
-  },[userDetails])
+  })
 
+
+  // Added because without this if you click on home, it shows a transparent view of home page
+  if(userDetails ==null) return null
 
   /*
     TO DO://

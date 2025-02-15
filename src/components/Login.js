@@ -85,6 +85,7 @@ const Login = () => {
   🎬 Binge Watch
 </h1>
 
+        <p1> Helllo {process.env.REACT_APP_MY_DATA}</p1>
 
         <div className="my-4">
         {!isSignin && (

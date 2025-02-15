@@ -14,7 +14,7 @@ const ProfileDropdown = () => {
       };
 
   return (
-    <div className="bg-black shadow-sm shadow-gray-800 text-white w-[9%] h-auto absolute mt-2  right-6  z-50   ">
+    <div className="bg-black shadow-sm shadow-gray-800 text-white w-[9%] h-auto absolute mt-2  right-6  z-50  w-[15%] ">
       <div className="flex mt-4 ml-4">
         <AiOutlineUser className="text-2xl mt-2" />
         <div className=" ml-1 p-2 text-md text-xl   ">Profile </div>

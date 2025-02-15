@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-
 import { auth, getLoginError } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../store/userSlice";
@@ -31,14 +30,13 @@ const Login = () => {
     setIsSignIn(!isSignin);
     setIsEmailError(false);
     setIsPasswordError(false);
-    setAuthError(false)
-    
+    setAuthError("");
   };
 
   const handleButtonLoginOrSignupButton = () => {
     setLoadingState(true);
     const isPwdValid = passwordValidation(password.current.value);
-    const isEmailValid = emailValidation(email.current.value); // returns true if email is valid
+    const isEmailValid = emailValidation(email.current.value);
 
     setIsEmailError(!isEmailValid);
     setIsPasswordError(!isPwdValid);
@@ -48,182 +46,84 @@ const Login = () => {
       return;
     }
 
-    if (isSignin) {
-      //Sign in:
-      signIn();
-    } else {
-      signUp();
-    }
+    isSignin ? signIn() : signUp();
   };
 
   const signIn = () => {
-    signInWithEmailAndPassword(
-      auth,
-      email.current.value,
-      password.current.value
-    )
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch(setUserDetails(user));
+        dispatch(setUserDetails(userCredential.user));
         navigate("/browse");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         setLoadingState(false);
-        setAuthError(getLoginError(errorCode + " " + errorMessage));
+        setAuthError(getLoginError(error.code + " " + error.message));
       });
   };
 
   const signUp = () => {
-    //Sign up
-    createUserWithEmailAndPassword(
-      auth,
-      email.current.value,
-      password.current.value
-    )
+    createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
         updateProfile(auth.currentUser, {
           displayName: firstName.current.value + " " + lastName.current.value,
-        })
-          .then(() => {
-            dispatch(setUserDetails(user));
-        navigate("/browse");
-
-          })
-          .catch((error) => {});
-
-        
+        }).then(() => {
+          dispatch(setUserDetails(userCredential.user));
+          navigate("/browse");
+        });
       })
       .catch((error) => {
         setLoadingState(false);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setAuthError(errorCode + " " + errorMessage);
+        setAuthError(error.code + " " + error.message);
       });
   };
 
   return (
-    <form
-      className="flex flex-col items-center"
-      onSubmit={(e) => e.preventDefault()}
-    >
-      <div className=" h-1/3 w-auto   mt-10 border rounded-xl border-gray-100 shadow-lg">
-        <img
-          src="https://m.media-amazon.com/images/G/01/digital/video/avod/AV_Logo_150._CB430404026_.png"
-          className="mx-auto my-2 mt-4 p-4 mb-4"
-        />
+    <form className="flex flex-col items-center px-4 sm:px-0" onSubmit={(e) => e.preventDefault()}>
+      <div className="w-full max-w-md mt-10 border rounded-xl border-gray-100 shadow-lg bg-white p-6 min-h-[370px]">
 
-        {!isSignin ? (
-          <div>
-            <div className="mx-4  flex-col mb-4 ">
-              <label className="font-bold     p-1 text-lg justify-start">
-                First Name
-              </label>
-              <input
-                ref={firstName}
-                type="text"
-                placeholder="First Name"
-                className="w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg"
-              />
-            </div>
+      <h1 className="text-4xl font-extrabold text-black-900 text-center mt-2 mb-8">
+  🎬 Binge Watch
+</h1>
 
-            <div className="mx-4  flex-col mb-4 ">
-              <label className="font-bold     p-1 text-lg justify-start">
-                Last Name
-              </label>
-              <input
-                ref={lastName}
-                type="text"
-                placeholder="Last Name"
-                className="w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg"
-              />
-            </div>
+
+        <div className="my-4">
+        {!isSignin && (
+          <div className="grid gap-4">
+            <input ref={firstName} type="text" placeholder="First Name" className="p-2 bg-white border border-gray-200 rounded-lg w-full" />
+            <input ref={lastName} type="text" placeholder="Last Name" className="p-2 bg-white border border-gray-200 rounded-lg w-full" />
           </div>
-        ) : null}
-
-        <div className="mx-4  flex-col ">
-          <label className="font-bold     p-1 text-lg justify-start">
-            Email
-          </label>
-          <input
-            ref={email}
-            type="text"
-            placeholder="Email"
-            className={`w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg ${
-              isEmailError ? "border-red-500 bg-red-50" : ""
-            }`}
-          />
-          {isEmailError ? (
-            <h1 className="text-red-500 text-sm font-bold p-1">
-              {" "}
-              Please enter a valid email address{" "}
-            </h1>
-          ) : null}
+        )}
         </div>
-        <div className="mx-4 mt-4 flex-col ">
-          <label className="font-bold  text-lg  p-1 "> Password</label>
-          <input
-            ref={password}
-            type="password"
-            placeholder="Password"
-            className={`w-full mx-auto p-2 bg-white border border-gray-200 rounded-lg ${
-              isPasswordError ? "border-red-500 bg-red-50" : ""
-            }`}
-          />
-          {isPasswordError ? (
-            <div className="break-words">
-            <h1 className="text-red-500 text-sm font-bold p-1 ">
-              Password should contain at least - 
-            </h1>
-            <ol className="text-red-500 text-[13px] font-bold ml-8 list-disc">
+
+        <input ref={email} type="text" placeholder="Email" className={`p-2 w-full border rounded-lg ${isEmailError ? "border-red-500 bg-red-50" : "border-gray-200"}`} />
+        {isEmailError && <p className="text-red-500 text-sm">Please enter a valid email address</p>}
+
+        <input ref={password} type="password" placeholder="Password" className={`p-2 w-full border rounded-lg mt-4 ${isPasswordError ? "border-red-500 bg-red-50" : "border-gray-200"}`} />
+        {isPasswordError && (
+          <div className="text-red-500 text-sm">
+            <p>Password should contain at least:</p>
+            <ul className="ml-4 list-disc">
               <li>8 characters</li>
-              <li>1 uppercase</li>
+              <li>1 uppercase letter</li>
               <li>1 lowercase letter</li>
-              <li> 1 digit</li>
-              <li> 1 special character(e.g., !@#$%^&*)</li>
-
-            </ol>
-            
-            </div>
-
-          ) : null}
-        </div>
-        <div className=" mt-4 mx-4 mb-10">
-          <h1 className="text-red-500 p-1 font-bold text-sm"> {authError}</h1>
-          <button
-            className=" bg-yellow-400  p-2 rounded-lg w-full font-bold hover:bg-yellow-500"
-            onClick={handleButtonLoginOrSignupButton}
-          >
-            <div className="flex justify-center">
-              {isSignin ? "SignIn" : "SignUp"}
-              {loadingState ? <Spinner /> : null}
-            </div>
-          </button>
-
-          <div className="mt-3">
-            <h1 className=" ">By continuing, you agree to the - </h1>
-            <h1 className=" text-blue-700 ">
-              Amazon Conditions of Use and Privacy Notice.{" "}
-            </h1>
+              <li>1 digit</li>
+              <li>1 special character (!@#$%^&*)</li>
+            </ul>
           </div>
-        </div>
+        )}
+
+        <p className="text-red-500 text-sm mt-2">{authError}</p>
+
+        <button className="mt-4 bg-yellow-400 p-2 rounded-lg w-full font-bold hover:bg-yellow-500 flex justify-center" onClick={handleButtonLoginOrSignupButton}>
+          {isSignin ? "Sign In" : "Sign Up"} {loadingState && <Spinner />}
+        </button>
+
+        <p className="mt-8 text-sm">By continuing, you agree to Binge Watch's <span className="text-blue-700">Conditions of Use</span> and <span className="text-blue-700">Privacy Notice</span>.</p>
       </div>
 
-      <h1 className=" mt-3">
-        {" "}
-        {isSignin ? "New to Amazon?" : "Already Have an Account ?"}{" "}
-      </h1>
-      <button
-        className=" mt-2 bg-gray-100   p-2 rounded-lg  font-bold hover:bg-blue-50 hover:border hover:border-blue-400"
-        onClick={toggleIsSignIn}
-      >
-        {isSignin
-          ? "Create your Amazon Account"
-          : "Login to your Amazon Account"}
+      <p className="mt-3 text-sm">{isSignin ? "New to Binge Watch?" : "Already have an account?"}</p>
+      <button className="mt-2 bg-gray-100 p-2 rounded-lg font-bold hover:bg-blue-50 border border-gray-200" onClick={toggleIsSignIn}>
+        {isSignin ? "Create your Binge Watch Account" : "Login to your Binge Watch Account"}
       </button>
     </form>
   );

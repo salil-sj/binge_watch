@@ -52,25 +52,25 @@ const Header = () => {
       <div className="grid grid-cols-5 gap-4">
         <div className="col-span-1 "></div>
         <div className="col-span-3 ">
-          <ul className="text-white hidden lg:flex justify-center">
+        <ul className="text-white hidden lg:flex justify-center">
             <li className="m-1 mx-3 p-2 text-2xl">primeVideo </li>
-            <Link to={"/browse"}>
+  <Link to={"/browse"}>
               <li className="m-1 mx-3 p-2 text-2xl">Home</li>
-            </Link>
-            <Link to={"/browse/development"}>
+  </Link>
+  <Link to={"/browse/development"}>
               <li className="m-1 mx-3 p-2 text-2xl">Store</li>
-            </Link>
-            <Link to={"/browse/development"}>
+  </Link>
+  <Link to={"/browse/development"}>
               <li className="m-1 mx-3 p-2 text-2xl">Live Tv</li>
-            </Link>
-            <Link to={"/browse/development"}>
+  </Link>
+  <Link to={"/browse/development"}>
               <li className="m-1 mx-3 p-2 text-2xl">Categories</li>
-            </Link>
-            <Link to={"/browse/recommendation"}>
+  </Link>
+  <Link to={"/browse/recommendation"}>
               <li className="m-1 mx-3 p-2 text-2xl">Movies Recommendation</li>
-            </Link>
+  </Link>
             <li></li>
-          </ul>
+</ul>
         </div>
 
         {userDetails && (
